@@ -10,9 +10,7 @@ Jeejio OS 是一套基于 Android 的 IoT(物联网) 设备的操作系统，具
 
 该SDK是一个使您可以轻松开发物端 APP 的开发者工具包，提供了与控制端 H5 交互和监听物端设备按键的功能，只需轻松几步即可使您的 APP 接入 Jeejio 云。
 
-### Popup Message SDK
 
-该SDk提供消息预览功能，在您的控制端您可以选择预览某个视频或图片，在物端就会为您展示10秒。
 
 ## 集成指南
 
@@ -22,21 +20,15 @@ Jeejio OS 是一套基于 Android 的 IoT(物联网) 设备的操作系统，具
 - JeejioCloudService：云服务代理对象。您的APP可以通过此对象与 Jeejio 云服务建立链接。
 - InputEventService：按键服务。您可以通过该服务来监听物端设备按键事件。
 - OnInputEventListener：物端按键事件监听器，可以通过该监听器收到来物端按键的触发状态。
-- PopupMessageImp：消息主体，通过此类构建您需要预览的消息。
-- PopupMessageManagerImp：消息预览服务。
 
 ### 接入说明
 
 - SDK下载
    前往 [Github](https://github.com/jeejio/Jeejio-OS-SDK/tags) 下载最新版本。
 
-- Jeejio OS SDK导入
+- Android SDK导入
 
   将下载下来的 `CloudserviceLib.jar` 放入 AndroidStudio 工程的 `libs` 目录下，并在 `app/build.gradle` 文件中加入 `implementation files('libs/CloudServiceLib.jar')`，即可完成导入。
-
-- Popup Message SDK导入
-
-  将下载下来的 `PopupMessageLib.jar` 放入 AndroidStudio 工程的 `libs` 目录下，并在 `app/build.gradle` 文件中加入 `implementation files('libs/PopupMessageLib.jar')`，即可完成导入。
 
 - 混淆规则
 
@@ -141,31 +133,7 @@ String userId = JeejioCloudService.getUserId(this);
 Log.i(TAG, "userId = " + userId);
 ```
 
-**4、预览消息（以图片为例）**
 
-- 在AndroidManifest.xml中的<application/>标签中添加provider
-
-```java
-<provider
-    android:name="jeejio.popup.PopUpMessageProvider"
-    android:authorities="${applicationId}.popup.provider" />
-```
-
-- 获取manager示例
-
-```java
-PopupMessageManagerImp managerImp = PopupMessageManagerImp.getInstance(getApplicationContext());
-```
-
-- 弹出消息
-
-```java
-PopupMessageImp imp = new PopupMessageImp.Builder(PopupMessageActivity.this)
-        .setContentTitle("图片")
-        .setContentPath("地址")
-        .setContentType(PopupMessageManagerImp.POPUP_MESSAGE_PICTURE).build();
-managerImp.notify(imp);
-```
 
 ## 更新日志
 
